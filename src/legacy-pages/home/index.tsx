@@ -14,7 +14,7 @@ import LightboxImageDisplay from '../../components/common/LightboxImageDisplay';
 import { processImageUrl } from '../../utils/imageUtils';
 
 interface HomeProps {
-  cmsData: any;
+  cmsData: any; 
 }
 
 const Home: React.FC<HomeProps> = ({ cmsData }) => {
