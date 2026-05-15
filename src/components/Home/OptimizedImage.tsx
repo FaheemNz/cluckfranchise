@@ -44,9 +44,11 @@ const OptimizedImage = ({
     useEffect(() => {
 
         const absoluteUrl =
-            src?.startsWith("/")
-                ? src
-                : toAbsoluteUrl(src) || src;
+            src?.startsWith("/storage/") || src?.startsWith("/uploads/")
+                ? toAbsoluteUrl(src) || src
+                : src?.startsWith("/")
+                    ? src
+                    : toAbsoluteUrl(src) || src;
 
         setImageSrc(absoluteUrl);
 

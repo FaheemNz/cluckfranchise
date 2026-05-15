@@ -14,7 +14,7 @@ import LightboxImageDisplay from '../../components/common/LightboxImageDisplay';
 import { processImageUrl } from '../../utils/imageUtils';
 
 interface HomeProps {
-  cmsData: any; 
+    cmsData: any;
 }
 
 const Home: React.FC<HomeProps> = ({ cmsData }) => {
@@ -25,14 +25,14 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
     // Build cms structure from server-provided data
     const cms = {
         home: {
-            bannerSection: cmsData?.home?.bannerSection,
-            cateringSection: cmsData?.home?.cateringSection,
-            crispyAndCrunchySection: cmsData?.home?.crispyAndCrunchySection,
-            imagesSection: cmsData?.home?.imagesSection,
-            imagesSection2: cmsData?.home?.imagesSection2,
-            newsSection: cmsData?.home?.newsSection,
-            reviewSection: cmsData?.home?.reviewSection,
-            sliderImagesSection: cmsData?.home?.sliderImagesSection,
+            bannerSection: cmsData?.home?.sections?.bannerSection,
+            cateringSection: cmsData?.home?.sections?.cateringSection,
+            crispyAndCrunchySection: cmsData?.home?.sections?.crispyAndCrunchySection,
+            imagesSection: cmsData?.home?.sections?.imagesSection,
+            imagesSection2: cmsData?.home?.sections?.imagesSection2,
+            newsSection: cmsData?.home?.sections?.newsSection,
+            reviewSection: cmsData?.home?.sections?.reviewSection,
+            sliderImagesSection: cmsData?.home?.sections?.sliderImagesSection,
         }
     };
 
@@ -128,77 +128,77 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
 
                 {/* Crispy & Crunchy Section with Image Cards */}
                 {cms?.home?.crispyAndCrunchySection?.visible && (
-                <section className="relative w-full flex flex-col items-center justify-center">
-                    <div
-                        className="absolute inset-0 bg-no-repeat bg-fixed 
+                    <section className="relative w-full flex flex-col items-center justify-center">
+                        <div
+                            className="absolute inset-0 bg-no-repeat bg-fixed 
                                 bg-[length:380px_auto,180px_auto] 
                                 bg-[position:calc(-3%_-_90px)_90%,calc(90%_+_110px)_100px] 
                                 opacity-10"
-                        style={{
-                            backgroundImage: "url('/assets/franchising-bg.jpg'), url('/assets/catering/background-maincontent.jpg')"
-                        }}
-                    />
+                            style={{
+                                backgroundImage: "url('/assets/franchising-bg.jpg'), url('/assets/catering/background-maincontent.jpg')"
+                            }}
+                        />
 
-                    <section className="bg-white mt-9 lg:mt-[70px] mb-5 lg:mb-[5px]">
-                        <div className="max-w-6xl mx-auto px-4">
-                            <div className="relative flex justify-center">
-                                <div
-                                    className="text-[24px] font-bold uppercase text-[#A15B21] bg-[#F3C317] px-7 py-2 mx-auto -rotate-3 leading-tight w-fit"
-                                    style={{
-                                        clipPath: 'polygon(0 0, 100% 0, calc(100% - 0.8em) 50%, 100% 100%, 0 100%, 0.8em 50%)'
-                                    }}
-                                >
-                                    {cms?.home?.crispyAndCrunchySection?.ribbon_title}
+                        <section className="bg-white mt-9 lg:mt-[70px] mb-5 lg:mb-[5px]">
+                            <div className="max-w-6xl mx-auto px-4">
+                                <div className="relative flex justify-center">
+                                    <div
+                                        className="text-[24px] font-bold uppercase text-[#A15B21] bg-[#F3C317] px-7 py-2 mx-auto -rotate-3 leading-tight w-fit"
+                                        style={{
+                                            clipPath: 'polygon(0 0, 100% 0, calc(100% - 0.8em) 50%, 100% 100%, 0 100%, 0.8em 50%)'
+                                        }}
+                                    >
+                                        {cms?.home?.crispyAndCrunchySection?.ribbon_title}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
 
-                    <section className="bg-white">
-                        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                            <h3 className="pm-custom-section-subheading pm-h3 tracking-wide lg:tracking-wider">
-                                {cms?.home?.crispyAndCrunchySection?.title}
-                            </h3>
-                            <p className="text-base sm:text-lg md:text-xl text-[#663300] mb-8 sm:mb-10 md:mb-12 leading-relaxed max-w-3xl mx-auto px-2">
-                                {cms?.home?.crispyAndCrunchySection?.description}
-                            </p>
-                            <Link
-                                href={cms?.home?.crispyAndCrunchySection?.links?.location?.url || '/locations'}
-                                className="cta-link cta-link-arrow touch-manipulation inline-flex items-center justify-center"
-                            >
-                                {cms?.home?.crispyAndCrunchySection?.links?.location?.text}
-                            </Link>
-                        </div>
-                    </section>
+                        <section className="bg-white">
+                            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                                <h3 className="pm-custom-section-subheading pm-h3 tracking-wide lg:tracking-wider">
+                                    {cms?.home?.crispyAndCrunchySection?.title}
+                                </h3>
+                                <p className="text-base sm:text-lg md:text-xl text-[#663300] mb-8 sm:mb-10 md:mb-12 leading-relaxed max-w-3xl mx-auto px-2">
+                                    {cms?.home?.crispyAndCrunchySection?.description}
+                                </p>
+                                <Link
+                                    href={cms?.home?.crispyAndCrunchySection?.links?.location?.url || '/locations'}
+                                    className="cta-link cta-link-arrow touch-manipulation inline-flex items-center justify-center"
+                                >
+                                    {cms?.home?.crispyAndCrunchySection?.links?.location?.text}
+                                </Link>
+                            </div>
+                        </section>
 
-                    {cms?.home?.imagesSection?.visible && (
-                    <section className="m-5 w-[calc(100vw-2rem)] lg:w-auto">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            {(cms?.home?.imagesSection?.images || imageCardsData).map((image: {url: string; title: string} | ImageCardData, index: number) => {
-                                const imageSrc = 'url' in image ? image.url : image.src;
-                                const imageAlt = 'title' in image ? image.title : image.alt;
+                        {cms?.home?.imagesSection?.visible && (
+                            <section className="m-5 w-[calc(100vw-2rem)] lg:w-auto">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                    {(cms?.home?.imagesSection?.images || imageCardsData).map((image: { url: string; title: string } | ImageCardData, index: number) => {
+                                        const imageSrc = 'url' in image ? image.url : image.src;
+                                        const imageAlt = 'title' in image ? image.title : image.alt;
 
-                                return (
-                                    <div
-                                        key={index}
-                                        className="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[450px] group overflow-hidden rounded-xl cursor-pointer"
-                                        onClick={() => openLightbox(index, 'imagesSection')}
-                                    >
-                                        <OptimizedImage
-                                            src={imageSrc}
-                                            alt={imageAlt}
-                                            className="w-full h-full object-cover rounded-3xl transition-transform duration-500 group-hover:scale-105"
-                                            loading="lazy"
-                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                                        />
-                                        <div className="absolute inset-0 bg-gray-100/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="relative w-full h-64 sm:h-80 md:h-[450px] lg:h-[450px] group overflow-hidden rounded-xl cursor-pointer"
+                                                onClick={() => openLightbox(index, 'imagesSection')}
+                                            >
+                                                <OptimizedImage
+                                                    src={imageSrc}
+                                                    alt={imageAlt}
+                                                    className="w-full h-full object-cover rounded-3xl transition-transform duration-500 group-hover:scale-105"
+                                                    loading="lazy"
+                                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                                />
+                                                <div className="absolute inset-0 bg-gray-100/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        )}
                     </section>
-                    )}
-                </section>
                 )}
 
                 {/* Catering Section */}
@@ -211,95 +211,95 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
 
                 {/* Media Partners Section */}
                 {cms?.home?.newsSection?.visible && (
-                <section className="bg-white my-9">
-                    <div className="px-4">
-                        <div className="flex justify-center">
-                            <div
-                                className="text-[24px] font-bold uppercase text-[#A15B21] bg-[#F3C317] px-7 py-2 mx-auto -rotate-3 leading-tight w-fit"
-                                style={{
-                                    clipPath: "polygon(0 0, 100% 0, calc(100% - 0.8em) 50%, 100% 100%, 0 100%, 0.8em 50%)",
-                                }}
-                            >
-                                {cms?.home?.newsSection?.ribbon_title}
+                    <section className="bg-white my-9">
+                        <div className="px-4">
+                            <div className="flex justify-center">
+                                <div
+                                    className="text-[24px] font-bold uppercase text-[#A15B21] bg-[#F3C317] px-7 py-2 mx-auto -rotate-3 leading-tight w-fit"
+                                    style={{
+                                        clipPath: "polygon(0 0, 100% 0, calc(100% - 0.8em) 50%, 100% 100%, 0 100%, 0.8em 50%)",
+                                    }}
+                                >
+                                    {cms?.home?.newsSection?.ribbon_title}
+                                </div>
                             </div>
-                        </div>
 
-                        <h3 className="pm-custom-section-subheading pm-h3 mt-7">
-                            {cms?.home?.newsSection?.title}
-                        </h3>
-                        <p className="text-base sm:text-lg lg:text-[18px] text-[#663300] mb-12 leading-relaxed text-center mx-auto max-w-9xl px-4">
-                            {cms?.home?.newsSection?.subtitle}
-                        </p>
+                            <h3 className="pm-custom-section-subheading pm-h3 mt-7">
+                                {cms?.home?.newsSection?.title}
+                            </h3>
+                            <p className="text-base sm:text-lg lg:text-[18px] text-[#663300] mb-12 leading-relaxed text-center mx-auto max-w-9xl px-4">
+                                {cms?.home?.newsSection?.subtitle}
+                            </p>
 
-                        <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
-                            {(cms?.home?.newsSection?.partner_images || []).slice(0, 7).map((partner: {url: string; title: string} | { id: number; link: string; src: string; alt: string }, index: number) => {
-                                const partnerSrc = 'url' in partner ? partner.url : partner.src;
-                                const partnerAlt = 'title' in partner ? partner.title : partner.alt;
-                                const partnerLink = 'link' in partner ? partner.link : '#';
-
-                                return (
-                                    <a key={index} href={partnerLink} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity duration-300 touch-manipulation">
-                                        <OptimizedImage src={partnerSrc} alt={partnerAlt} className="w-[150px] sm:w-[190px] h-[70px] sm:h-[90px] object-contain" loading="lazy" />
-                                    </a>
-                                );
-                            })}
-                        </div>
-
-                        {(cms?.home?.newsSection?.partner_images || []).length > 7 && (
-                            <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 mt-6">
-                                {(cms?.home?.newsSection?.partner_images || []).slice(7).map((partner: {url: string; title: string} | { id: number; link: string; src: string; alt: string }, index: number) => {
+                            <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12">
+                                {(cms?.home?.newsSection?.partner_images || []).slice(0, 7).map((partner: { url: string; title: string } | { id: number; link: string; src: string; alt: string }, index: number) => {
                                     const partnerSrc = 'url' in partner ? partner.url : partner.src;
                                     const partnerAlt = 'title' in partner ? partner.title : partner.alt;
                                     const partnerLink = 'link' in partner ? partner.link : '#';
 
                                     return (
-                                        <a key={index + 7} href={partnerLink} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity duration-300 touch-manipulation">
+                                        <a key={index} href={partnerLink} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity duration-300 touch-manipulation">
                                             <OptimizedImage src={partnerSrc} alt={partnerAlt} className="w-[150px] sm:w-[190px] h-[70px] sm:h-[90px] object-contain" loading="lazy" />
                                         </a>
                                     );
                                 })}
                             </div>
-                        )}
 
-                        <div className="text-center my-10">
-                            {(() => {
-                                const url = cms?.home?.newsSection?.links?.award?.url || '';
-                                const isExternal = url.startsWith('http://') || url.startsWith('https://');
+                            {(cms?.home?.newsSection?.partner_images || []).length > 7 && (
+                                <div className="flex flex-wrap justify-center items-center gap-8 sm:gap-12 mt-6">
+                                    {(cms?.home?.newsSection?.partner_images || []).slice(7).map((partner: { url: string; title: string } | { id: number; link: string; src: string; alt: string }, index: number) => {
+                                        const partnerSrc = 'url' in partner ? partner.url : partner.src;
+                                        const partnerAlt = 'title' in partner ? partner.title : partner.alt;
+                                        const partnerLink = 'link' in partner ? partner.link : '#';
 
-                                return isExternal ? (
-                                    <a href={url} target="_blank" rel="noopener noreferrer" className="cta-link cta-link-arrow font-bold text-[#F15B40] touch-manipulation">
-                                        {cms?.home?.newsSection?.links?.award?.text}
-                                    </a>
-                                ) : (
-                                    <Link href={url || '/press'} className="cta-link cta-link-arrow font-bold text-[#F15B40] touch-manipulation">
-                                        {cms?.home?.newsSection?.links?.award?.text}
-                                    </Link>
-                                );
-                            })()}
+                                        return (
+                                            <a key={index + 7} href={partnerLink} target="_blank" rel="noopener noreferrer" className="block hover:opacity-80 transition-opacity duration-300 touch-manipulation">
+                                                <OptimizedImage src={partnerSrc} alt={partnerAlt} className="w-[150px] sm:w-[190px] h-[70px] sm:h-[90px] object-contain" loading="lazy" />
+                                            </a>
+                                        );
+                                    })}
+                                </div>
+                            )}
+
+                            <div className="text-center my-10">
+                                {(() => {
+                                    const url = cms?.home?.newsSection?.links?.award?.url || '';
+                                    const isExternal = url.startsWith('http://') || url.startsWith('https://');
+
+                                    return isExternal ? (
+                                        <a href={url} target="_blank" rel="noopener noreferrer" className="cta-link cta-link-arrow font-bold text-[#F15B40] touch-manipulation">
+                                            {cms?.home?.newsSection?.links?.award?.text}
+                                        </a>
+                                    ) : (
+                                        <Link href={url || '/press'} className="cta-link cta-link-arrow font-bold text-[#F15B40] touch-manipulation">
+                                            {cms?.home?.newsSection?.links?.award?.text}
+                                        </Link>
+                                    );
+                                })()}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
                 )}
 
                 {/* Three Image Grid Section */}
                 {cms?.home?.imagesSection2?.visible && (
-                <section className="w-full bg-amber-400 py-4 mt-5">
-                    <div className="max-w-10xl mx-auto px-4">
-                        <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
-                            {(cms?.home?.imagesSection2?.images || []).map((item: {url: string; title: string} | { src: string; alt: string }, index: number) => {
-                                const imageSrc = 'url' in item ? item.url : item.src;
-                                const imageAlt = 'title' in item ? item.title : item.alt;
+                    <section className="w-full bg-amber-400 py-4 mt-5">
+                        <div className="max-w-10xl mx-auto px-4">
+                            <div className="grid grid-cols-1 lg:grid-cols-4 gap-3">
+                                {(cms?.home?.imagesSection2?.images || []).map((item: { url: string; title: string } | { src: string; alt: string }, index: number) => {
+                                    const imageSrc = 'url' in item ? item.url : item.src;
+                                    const imageAlt = 'title' in item ? item.title : item.alt;
 
-                                return (
-                                    <div key={index} className="relative rounded-[32px] overflow-hidden shadow-lg group cursor-pointer" onClick={() => openLightbox(index, 'imagesSection2')}>
-                                        <OptimizedImage src={imageSrc} alt={imageAlt} className="object-cover w-full h-64 sm:h-80 md:h-[30rem] transition-transform duration-300 group-hover:scale-105" loading="lazy" sizes="(max-width: 1024px) 100vw, 25vw" />
-                                        <div className="absolute inset-0 bg-yellow-500/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                    </div>
-                                );
-                            })}
+                                    return (
+                                        <div key={index} className="relative rounded-[32px] overflow-hidden shadow-lg group cursor-pointer" onClick={() => openLightbox(index, 'imagesSection2')}>
+                                            <OptimizedImage src={imageSrc} alt={imageAlt} className="object-cover w-full h-64 sm:h-80 md:h-[30rem] transition-transform duration-300 group-hover:scale-105" loading="lazy" sizes="(max-width: 1024px) 100vw, 25vw" />
+                                            <div className="absolute inset-0 bg-yellow-500/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                        </div>
+                                    );
+                                })}
+                            </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
                 )}
 
                 {/* Review Section */}

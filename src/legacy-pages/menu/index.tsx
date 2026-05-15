@@ -3,56 +3,20 @@
 import React, { useState, useEffect } from "react";
 import ProductModal from "../../components/common/Menu/ProductModal";
 import Pagebanner from "../../components/common/Pagebanner";
-import { useMenuData } from "./hooks/useMenuData";
-import LoadingSpinner from "../../components/Home/LoadingSpinner";
-import ErrorMessage from "../../components/Home/ErrorMessage";
 import ErrorBoundary from "../../components/Home/ErrorBoundary";
 import { processImageUrl } from "../../utils/imageUtils";
 import LocationCard from "../../components/Locations/LocationCard";
-import { useGlobalData } from "../../services/globalDataManager";
 import NotFound from "../404";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 
-const LOCATION_SEO: Record<string, { title: string; description: string }> = {
-  calgary: {
-    title: "Halal Fried Chicken Restaurant Calgary | Cluck Clucks",
-    description:
-      "Enjoy Calgary’s best Halal fried chicken at Cluck Clucks. Fresh, juicy, crispy chicken, sandwiches, and poutines made halal and served hot every day.",
-  },
-  toronto: {
-    title: "Best Halal Chicken Restaurant in Toronto | Cluck Clucks",
-    description:
-      "Not your average fried chicken restaurant. We’re Toronto’s go-to for crispy fried chicken, bold sauces, and unforgettable bites. Order now!",
-  },
-  mississauga: {
-    title: "Fried Chicken and Sandwich | Chicken Restaurant Mississauga",
-    description:
-      "Mississauga’s top chicken restaurant for crispy halal fried chicken, waffles, and juicy sandwiches. Fresh, bold, and made to satisfy every bite.",
-  },
-  ajax: {
-    title: "Chicken Restaurant Ajax | Fried Chicken and Sandwich",
-    description:
-      "Craving fried chicken in Ajax? Visit the top chicken restaurant serving crispy chicken, bold sandwiches, and comfort food made fresh daily.",
-  },
-  oakville: {
-    title: "Chicken Restaurant Oakville | Fried Chicken and Sandwich",
-    description:
-      "Craving crispy fried chicken in Oakville? Cluck Clucks serves bold, halal chicken sandwiches, waffles & more. Fresh, juicy, and full of flavor.",
-  },
-  waterloo: {
-    title: "Chicken Restaurant Waterloo | Fried Chicken and Sandwich",
-    description:
-      "Looking for crispy fried chicken in Waterloo? Cluck Clucks brings bold halal flavors, juicy chicken sandwiches, and waffles worth drooling over.",
-  },
-  scarborough: {
-    title: "Chicken Restaurant Scarborough | Fried Chicken and Sandwich",
-    description:
-      "Looking for crispy fried chicken in Scarborough? Cluck Clucks brings bold halal flavors, juicy chicken sandwiches, and waffles worth drooling over.",
-  },
-};
 
-const Menu: React.FC = () => {
+interface MenuProps {
+  cmsData: any;
+  menuData: any;
+}
+
+const Menu: React.FC<MenuProps> = ({ cmsData, menuData }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [locationId, setLocationId] = useState<number | null>(null);
@@ -67,20 +31,11 @@ const Menu: React.FC = () => {
       .replace(/(^-|-$)+/g, "");
 
   // Use the custom hook for CMS data and locations
-  const { cms, seo, loadingState, retry } = useMenuData();
+  const cms = menuData;
 
-  // // ✅ Get all location cards (Canada + USA) from global data
-  // const globalData = useGlobalData();
-  // const allCMS = globalData.data || {};
-  // const canadaCards =
-  //   allCMS?.["canada-locations"]?.sections?.locationsSection?.cards || [];
-  // const usaCards =
-  //   allCMS?.["usa-locations"]?.sections?.locationsSection?.cards || [];
-  // const allLocations = [...canadaCards, ...usaCards];
 
-  // ✅ Get all location cards (Canada + USA) from global data
-  const globalData = useGlobalData();
-  const allCMS = globalData.data || {};
+  const allCMS = cmsData || {};
+
   const [mergedLocations, setMergedLocations] = useState<any[]>([]);
 
   useEffect(() => {
@@ -109,7 +64,8 @@ const Menu: React.FC = () => {
     console.log("🌍 Combined total locations:", combined.length, combined);
 
     setMergedLocations(combined);
-  }, [globalData.data]);
+  }, [allCMS]);
+
 
   //   const transformedLocations =
   //     menuLocations?.map((card: any) => ({
@@ -202,22 +158,22 @@ const Menu: React.FC = () => {
     if (!cms?.sections?.menuSection?.menuItems) return [];
 
     return cms.sections.menuSection.menuItems
-      .map((category) => {
+      .map((category: any) => {
         // Use URL locationId first, then mobile dropdown selection, then show all items
         const activeLocationId = locationId || selectedMobileLocationId;
 
         // Filter items based on location ID if provided
         const filteredItems = activeLocationId
           ? category.items.filter(
-              (item) =>
-                item.locations &&
-                item.locations.some((loc: any) => loc.id === activeLocationId),
-            )
+            (item: any) =>
+              item.locations &&
+              item.locations.some((loc: any) => loc.id === activeLocationId),
+          )
           : category.items;
 
         return {
           title: category.category,
-          products: filteredItems.map((item) => ({
+          products: filteredItems.map((item: any) => ({
             id: item.id, // Pass the actual item ID
             img: item.image?.url
               ? item.image.url.startsWith("http")
@@ -227,7 +183,7 @@ const Menu: React.FC = () => {
             title: item.title,
             location: activeLocationId
               ? item.locations?.find((loc: any) => loc.id === activeLocationId)
-                  ?.title || "Unknown"
+                ?.title || "Unknown"
               : "All Locations",
             likes: Math.floor(Math.random() * 30) + 1, // Random likes for now
             reviews: item.reviews_count || 0,
@@ -236,7 +192,7 @@ const Menu: React.FC = () => {
           })),
         };
       })
-      .filter((category) => category.products.length > 0); // Only show categories that have items
+      .filter((category: any) => category.products.length > 0); // Only show categories that have items
   };
 
   const categories = transformMenuData();
@@ -244,34 +200,17 @@ const Menu: React.FC = () => {
   const isValidLocation = !locationSlug
     ? true
     : mergedLocations.some(
-        (loc) =>
-          loc.title
-            ?.toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/(^-|-$)+/g, "") === locationSlug,
-      );
+      (loc) =>
+        loc.title
+          ?.toLowerCase()
+          .replace(/[^a-z0-9]+/g, "-")
+          .replace(/(^-|-$)+/g, "") === locationSlug,
+    );
 
   if (!isValidLocation) {
     return <NotFound />;
   }
 
-  // Show loading state
-  if (loadingState.isLoading) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Loading delicious menu..." />
-      </div>
-    );
-  }
-
-  // Show error state
-  if (loadingState.error) {
-    return (
-      <div className="min-h-screen bg-white flex items-center justify-center p-4">
-        <ErrorMessage error={loadingState.error} onRetry={retry} />
-      </div>
-    );
-  }
   return (
     <>
       <ErrorBoundary>
@@ -279,13 +218,13 @@ const Menu: React.FC = () => {
           title={
             locationId
               ? `${(() => {
-                  const loc = mergedLocations.find(
-                    (l: any) => Number(l.id) === Number(locationId),
-                  );
-                  return loc?.title
-                    ? `Best Chicken Restaurant ${loc.title}`
-                    : "Menu";
-                })()}`
+                const loc = mergedLocations.find(
+                  (l: any) => Number(l.id) === Number(locationId),
+                );
+                return loc?.title
+                  ? `Best Chicken Restaurant ${loc.title}`
+                  : "Menu";
+              })()}`
               : cms?.sections?.titleSection?.title || "Menu"
           }
           subtitle={locationId ? "Location Details + Menu" : undefined}
@@ -545,7 +484,7 @@ const Menu: React.FC = () => {
             </div>
             {/* Only render menu if visible in API */}
             {cms?.sections?.menuSection?.visible &&
-              categories.map((category, catIdx) => (
+              categories.map((category: any, catIdx: any)  => (
                 <div key={catIdx} className="parent bg-[#FFFFFF] p-4 sm:p-6">
                   {/* Category Title */}
                   <div className="title text-[#F15B41] mb-4 sm:mb-6">
@@ -555,7 +494,7 @@ const Menu: React.FC = () => {
                   </div>
                   {/* Products Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                    {category.products.map((product, idx) => (
+                    {category.products.map((product: any, idx: any) => (
                       <div
                         key={idx}
                         className="flex flex-col sm:flex-row items-center sm:items-start gap-3 
@@ -575,9 +514,8 @@ const Menu: React.FC = () => {
                           </div>
                         )}
                         <div
-                          className={`flex-1 ${
-                            product.img ? "mt-3 sm:mt-0" : ""
-                          }`}
+                          className={`flex-1 ${product.img ? "mt-3 sm:mt-0" : ""
+                            }`}
                         >
                           <div className="flex items-center justify-between">
                             <h3
