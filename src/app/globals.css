@@ -1,0 +1,270 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Prevent horizontal overflow globally */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Mobile responsive floating labels */
+@media (max-width: 640px) {
+  .floating-label {
+    font-size: 14px;
+  }
+  
+  .floating-label.float-up {
+    font-size: 12px;
+  }
+  
+  .floating-dropdown-label {
+    font-size: 12px;
+  }
+}
+
+/* CTA Link Styling */
+.cta-link {
+  display: inline-block;
+  font-weight: bold;
+  transform: scale(1);
+  transition: all 0.3s ease;
+  color: #EF4325;
+  border-bottom: 2px solid #EF4325;
+  text-align: center;
+  font-size: 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta-link-arrow::after {
+  content: " »";
+  position: relative;
+  padding-left: 6px;
+  top: -3px;
+  font-size: 24px;
+  vertical-align: middle;
+  transition: 250ms;
+}
+
+.cta-link:hover {
+  transform: scale(1.1);
+  color: #5c2c00;
+  border-bottom-color: #5c2c00;
+}
+
+.cta-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #EF4325;
+  box-shadow-offset: 2px;
+}
+
+/* Floating Label Input Styling */
+.floating-input-group {
+  position: relative;
+}
+
+.floating-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  transition: all 0.3s ease;
+  padding-top: 15px;
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.floating-input:focus {
+  outline: none;
+  border-color: #894105;
+  box-shadow: 0 0 0 3px rgba(137, 65, 5, 0.1);
+}
+
+.floating-label {
+  position: absolute;
+  left: 12px;
+  /* right: 12px; */
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  font-size: 16px;
+  top: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.floating-label.float-up {
+  color: #894105;
+  font-size: 14px;
+  top: -12px;
+  background-color: white;
+  padding: 0 8px;
+  z-index: 10;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 16px);
+}
+
+.floating-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  transition: all 0.3s ease;
+  padding-top: 15px;
+  font-size: 16px;
+  color: #1f2937;
+  resize: none;
+  min-height: 100px;
+}
+
+.floating-textarea:focus {
+  outline: none;
+  border-color: #894105;
+  box-shadow: 0 0 0 3px rgba(137, 65, 5, 0.1);
+}
+
+/* Floating Label Dropdown Styling */
+.floating-dropdown-group {
+  position: relative;
+}
+
+.floating-dropdown {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  transition: all 0.3s ease;
+  padding-top: 24px;
+  font-size: 16px;
+  color: #1f2937;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.floating-dropdown:focus {
+  outline: none;
+  border-color: #894105;
+  box-shadow: 0 0 0 3px rgba(137, 65, 5, 0.1);
+}
+
+.floating-dropdown-label {
+  position: absolute;
+  left: 12px;
+  /* right: 12px; */
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: #6b7280;
+  font-size: 14px;
+  top: -8px;
+  background-color: white;
+  padding: 0 8px;
+  z-index: 10;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 16px);
+}
+
+.floating-dropdown-group:focus-within .floating-dropdown-label {
+  color: #894105;
+}
+
+/* MDNichrome-Black Font */
+@font-face {
+  font-family: 'MDNichrome-Black';
+  src: url('https://db.onlinewebfonts.com/t/6f44683a150e4b542976f02dee50002a.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Main Heading Class - Reusable for all section titles */
+.pm-custom-section-subheading.pm-h3 {
+  font-family: 'MDNichrome-Black', 'MDNichrome', 'Arial Black', 'Helvetica Black', sans-serif;
+  font-size: 38px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: rgba(241, 91, 64, 1);
+  text-align: center;
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .pm-custom-section-subheading.pm-h3 {
+    font-size: 60px;
+  }
+}
+
+/* Generic heading styles for h1, h2, h3 with pm classes */
+:is(h1,h2,h3,h4,h5,h6):where(.pm-h1) {
+  font-size: 36px;
+}
+
+:is(h1,h2,h3,h4,h5,h6):where(.pm-h1,.pm-h2,.pm-h3) {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 1024px) {
+  .background-images {
+    background-image: 
+      url('https://popmenucloud.com/cdn-cgi/image/width=1920,height=1920,format=auto,fit=scale-down/ctsazijb/ac1bb47a-11e5-4f75-9388-9c7a555da425.png'),
+      url('https://popmenucloud.com/ctsazijb/eddd21fa-4a99-460f-bf15-1b629b860087.png');
+    background-position: left bottom, right bottom;
+    background-size: 35% 90%, 400px 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-attachment: fixed, fixed;
+  }
+}
+
+.rbc-header {
+  background-color: #85430F !important;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px;
+}
+
+/* Show all events in month view, remove +N more popup for react-big-calendar */
+.rbc-month-row {
+  min-height: 120px !important;
+}
+.rbc-date-cell {
+  height: auto !important;
+  overflow: visible !important;
+}
+.rbc-row-segment {
+  max-height: none !important;
+  overflow: visible !important;
+}
+.rbc-show-more {
+  display: none !important;
+}
+

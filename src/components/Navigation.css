@@ -1,0 +1,12 @@
+/* Custom CSS for brand colors - change here to update everywhere */
+.brand-text {
+    color: #df3011;
+}
+
+.brand-text-hover:hover {
+    color: #b8270e;
+}
+
+.brand-text-mobile-hover:hover {
+    color: #df3011;
+}
