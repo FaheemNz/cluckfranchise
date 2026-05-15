@@ -7,12 +7,12 @@ import Pagebanner from '../../components/common/Pagebanner'
 const locations = [
   {
     name: 'CANADA',
-    img: 'https://cluckclucksfranchise.com/admin/images/US.jpg',
+    img: 'https://cluckcluckschicken.com/admin/images/US.jpg',
     url: '/canada-locations', // Updated route
   },
   {
     name: 'UNITED STATES',
-    img: 'https://cluckclucksfranchise.com/admin/images/Canada.jpg',
+    img: 'https://cluckcluckschicken.com/admin/images/Canada.jpg',
     url: '/usa-locations', // Updated route
   },
 ]
