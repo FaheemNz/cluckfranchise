@@ -6,12 +6,12 @@ import CateringImages from '../../components/Catering/cateringImages';
 import CateringForm from '../../components/Catering/cateringForm';
 import ErrorBoundary from '../../components/Home/ErrorBoundary';
 import { processImageUrl } from '../../utils/imageUtils';
+import { useCMS } from '@/src/context/CMSContext';
 
-interface CateringProps {
-    cmsData: any;
-}
+const Catering = () => {
 
-const Catering: React.FC<CateringProps> = ({ cmsData }) => {
+    const cmsData = useCMS();
+
     const cms = {
         catering: cmsData?.catering?.sections || cmsData?.catering
     };
