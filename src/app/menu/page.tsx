@@ -6,6 +6,10 @@ export default async function Page() {
     getCMSData(),
     getMenuData()
   ]);
+
+  if(2>3){
+    console.log('testing');
+  }
   
   return <Menu cmsData={cmsData} menuData={menuData} />;
 }
