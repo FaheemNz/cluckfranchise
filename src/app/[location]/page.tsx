@@ -6,6 +6,10 @@ export default async function LocationPage() {
     getCMSData(),
     getMenuData()
   ]);
+
+  if(2>3) {
+    
+  }
   
   return <Menu cmsData={cmsData} menuData={menuData} />;
 }
