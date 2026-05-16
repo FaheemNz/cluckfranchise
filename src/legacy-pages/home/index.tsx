@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import ImageSlider from '../../components/common/ImageSlider';
 import { ImageCardData } from './types';
@@ -13,6 +13,12 @@ import OptimizedImage from '../../components/Home/OptimizedImage';
 import LightboxImageDisplay from '../../components/common/LightboxImageDisplay';
 import { processImageUrl } from '../../utils/imageUtils';
 
+const DEFAULT_IMAGE_CARDS = [
+    { id: 1, src: '/assets/img1.webp', alt: 'Multi-layered Fried Chicken & Waffles Stack' },
+    { id: 2, src: '/assets/img2.webp', alt: 'Golden Fried Chicken on Waffle' },
+    { id: 3, src: '/assets/img3.webp', alt: 'Fried Chicken Sandwich' }
+];
+
 interface HomeProps {
     cmsData: any;
 }
@@ -23,7 +29,7 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
     const [zoom, setZoom] = useState<number>(1);
 
     // Build cms structure from server-provided data
-    const cms = {
+    const cms = useMemo(() => ({
         home: {
             bannerSection: cmsData?.home?.sections?.bannerSection,
             cateringSection: cmsData?.home?.sections?.cateringSection,
@@ -34,14 +40,7 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
             reviewSection: cmsData?.home?.sections?.reviewSection,
             sliderImagesSection: cmsData?.home?.sections?.sliderImagesSection,
         }
-    };
-
-    const imageCardsData: ImageCardData[] = [
-        { id: 1, src: 'assets/img1.webp', alt: 'Multi-layered Fried Chicken & Waffles Stack' },
-        { id: 2, src: 'assets/img2.webp', alt: 'Golden Fried Chicken on Waffle' },
-        { id: 3, src: 'assets/img3.webp', alt: 'Fried Chicken Sandwich' }
-    ];
-
+    }), [cmsData]);
     // Lightbox handlers
     const openLightbox = (index: number, section: 'imagesSection' | 'imagesSection2') => {
         setSelectedImageIndex(index);
@@ -59,9 +58,9 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
         if (selectedSection === 'imagesSection') {
             return cms?.home?.imagesSection?.images || [];
         } else if (selectedSection === 'imagesSection2') {
-            return cms?.home?.imagesSection2?.images || imageCardsData;
+            return cms?.home?.imagesSection2?.images || DEFAULT_IMAGE_CARDS;
         }
-        return imageCardsData;
+        return DEFAULT_IMAGE_CARDS;
     };
 
     const handlePrev = () => {
@@ -174,7 +173,7 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
                         {cms?.home?.imagesSection?.visible && (
                             <section className="m-5 w-[calc(100vw-2rem)] lg:w-auto">
                                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                                    {(cms?.home?.imagesSection?.images || imageCardsData).map((image: { url: string; title: string } | ImageCardData, index: number) => {
+                                    {(cms?.home?.imagesSection?.images || DEFAULT_IMAGE_CARDS).map((image: { url: string; title: string } | ImageCardData, index: number) => {
                                         const imageSrc = 'url' in image ? image.url : image.src;
                                         const imageAlt = 'title' in image ? image.title : image.alt;
 

@@ -6,6 +6,7 @@ export async function getCMSData() {
     const res = await fetch(`${API_BASE_URL}/api/updates`, {
       headers: { "X-API-KEY": API_KEY! },
       next: { revalidate: 300 },
+      cache: "force-cache"
     });
 
     if (!res.ok) {
@@ -26,6 +27,7 @@ export async function getMenuData() {
     const res = await fetch(`${API_BASE_URL}/api/menu`, {
       headers: { "X-API-KEY": API_KEY! },
       next: { revalidate: 300 },
+      cache: "force-cache"
     });
 
     if (!res.ok) {
