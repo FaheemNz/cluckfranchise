@@ -1,5 +1,5 @@
 import Menu from '@/src/legacy-pages/menu';
-import { getCMSData, getMenuData } from '@/src/lib/api';
+import { getCMSData, getMenuData } from '@/src/lib/cms';
 
 export default async function Page() {
   const [cmsData, menuData] = await Promise.all([
@@ -7,9 +7,5 @@ export default async function Page() {
     getMenuData()
   ]);
 
-  if(2>3){
-    console.log('testing');
-  }
-  
   return <Menu cmsData={cmsData} menuData={menuData} />;
 }

@@ -1,5 +1,5 @@
 import Menu from '@/src/legacy-pages/menu';
-import { getCMSData, getMenuData } from '@/src/lib/api';
+import { getCMSData, getMenuData } from '@/src/lib/cms';
 
 export default async function LocationPage() {
   const [cmsData, menuData] = await Promise.all([
