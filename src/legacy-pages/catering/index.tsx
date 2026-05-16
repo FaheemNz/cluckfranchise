@@ -4,41 +4,17 @@ import React from 'react';
 import Pagebanner from '../../components/common/Pagebanner';
 import CateringImages from '../../components/Catering/cateringImages';
 import CateringForm from '../../components/Catering/cateringForm';
-import { useCateringData } from './hooks/useCateringData';
-import LoadingSpinner from '../../components/Home/LoadingSpinner';
-import ErrorMessage from '../../components/Home/ErrorMessage';
 import ErrorBoundary from '../../components/Home/ErrorBoundary';
 import { processImageUrl } from '../../utils/imageUtils';
-import { useGlobalData } from '../../services/globalDataManager';
 
-const Catering: React.FC = () => {
-    // Use the custom hook for CMS data
-    const { cms, loadingState, retry } = useCateringData();
-    const { data, isLoaded, fetchData } = useGlobalData();
+interface CateringProps {
+    cmsData: any;
+}
 
-    React.useEffect(() => {
-        if(!isLoaded) {
-            fetchData();
-        }
-    }, [isLoaded, fetchData]);
-
-    // Show loading state
-    if (loadingState.isLoading) {
-        return (
-            <div className="min-h-screen bg-white flex items-center justify-center">
-                <LoadingSpinner size="lg" text="Loading catering information..." />
-            </div>
-        );
-    }
-
-    // Show error state
-    if (loadingState.error) {
-        return (
-            <div className="min-h-screen bg-white flex items-center justify-center p-4">
-                <ErrorMessage error={loadingState.error} onRetry={retry} />
-            </div>
-        );
-    }
+const Catering: React.FC<CateringProps> = ({ cmsData }) => {
+    const cms = {
+        catering: cmsData?.catering?.sections || cmsData?.catering
+    };
 
     return (
         <ErrorBoundary>
@@ -47,9 +23,7 @@ const Catering: React.FC = () => {
                 {/* Banner Section */}
                 {cms?.catering?.bannerSection?.visible && (
                     <section className="relative w-full px-5 md:!px-[20px] xl:px-0">
-                        {/* Foreground Content */}
                         <article className="relative w-full py-12 flex flex-col md:flex-row max-w-7xl mx-auto gap-10 items-center justify-between">
-                            {/* Left Content */}
                             <div className="flex-1 flex flex-col justify-center items-start text-left">
                                 <h2 className="pm-custom-section-subheading pm-h3">
                                     {cms.catering.bannerSection.title}
@@ -64,9 +38,9 @@ const Catering: React.FC = () => {
                                             type="button"
                                             aria-label="Order catering now"
                                             className="flex items-center font-bold transform transition-all duration-300 
-                        text-[#EF4325] border-b-2 border-[#EF4325] 
-                        hover:scale-110 hover:text-[#5c2c00] hover:border-[#5c2c00] text-[18px]
-                        focus:outline-none focus:ring-2 focus:ring-[#EF4325] focus:ring-offset-2"
+                                                text-[#EF4325] border-b-2 border-[#EF4325] 
+                                                hover:scale-110 hover:text-[#5c2c00] hover:border-[#5c2c00] text-[18px]
+                                                focus:outline-none focus:ring-2 focus:ring-[#EF4325] focus:ring-offset-2"
                                             onClick={() => {
                                                 window.open('https://order.toasttab.com/online/locations/54ed1204-761d-4471-8efa-f815144010f0/default', '_blank');
                                             }}
@@ -80,9 +54,9 @@ const Catering: React.FC = () => {
                                             type="button"
                                             aria-label="Request special catering order"
                                             className="flex items-center font-bold transform transition-all duration-300 
-                        text-[#EF4325] border-b-2 border-[#EF4325] 
-                        hover:scale-110 hover:text-[#5c2c00] hover:border-[#5c2c00] text-[20px]
-                        focus:outline-none focus:ring-2 focus:ring-[#EF4325] focus:ring-offset-2"
+                                                text-[#EF4325] border-b-2 border-[#EF4325] 
+                                                hover:scale-110 hover:text-[#5c2c00] hover:border-[#5c2c00] text-[20px]
+                                                focus:outline-none focus:ring-2 focus:ring-[#EF4325] focus:ring-offset-2"
                                             onClick={() => {
                                                 const formSection = document.querySelector('section.background-images');
                                                 if (formSection) {
@@ -100,7 +74,6 @@ const Catering: React.FC = () => {
                                 </div>
                             </div>
 
-                            {/* Right Image */}
                             <div className="flex-1 flex justify-center lg:items-stretch">
                                 <img
                                     src={cms?.catering?.bannerSection?.image?.url ?
@@ -118,13 +91,12 @@ const Catering: React.FC = () => {
                     </section>
                 )}
 
-
                 {/* Images Section */}
                 {cms?.catering?.imagesSection?.visible && (
                     <section className="w-full bg-[#F3C317] py-3">
                         <CateringImages
                             imagesSection={cms?.catering?.imagesSection}
-                            isLoading={loadingState.isLoading}
+                            isLoading={false}
                         />
                     </section>
                 )}
@@ -135,8 +107,8 @@ const Catering: React.FC = () => {
                         <div className="max-w-4xl mx-auto">
                             <CateringForm
                                 formSection={cms?.catering?.formSection}
-                                locations={data?.locations || []}
-                                isLoading={loadingState.isLoading}
+                                locations={cmsData?.locations || []}
+                                isLoading={false}
                             />
                         </div>
                     </section>
