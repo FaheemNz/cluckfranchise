@@ -202,7 +202,7 @@ const Navigation = () => {
                 onClick={() => setIsMenuOpen(false)}
                 className="bg-[#F3C317] text-[18px] hover:bg-yellow-500 text-[#653003] font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 uppercase tracking-wide"
               >
-                ORDER ONLINE
+                ORDER ONLINE 2
               </Link>
               {/* MORE dropdown - Only visible between lg and xl */}
               <div className="xl:hidden relative">
