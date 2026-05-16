@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import ImageSlider from '../../components/common/ImageSlider';
 import { ImageCardData } from './types';
@@ -29,7 +29,7 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
     const [zoom, setZoom] = useState<number>(1);
 
     // Build cms structure from server-provided data
-    const cms = useMemo(() => ({
+    const cms = {
         home: {
             bannerSection: cmsData?.home?.sections?.bannerSection,
             cateringSection: cmsData?.home?.sections?.cateringSection,
@@ -40,7 +40,8 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
             reviewSection: cmsData?.home?.sections?.reviewSection,
             sliderImagesSection: cmsData?.home?.sections?.sliderImagesSection,
         }
-    }), [cmsData]);
+    };
+
     // Lightbox handlers
     const openLightbox = (index: number, section: 'imagesSection' | 'imagesSection2') => {
         setSelectedImageIndex(index);
