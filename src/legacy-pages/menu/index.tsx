@@ -9,63 +9,26 @@ import LocationCard from "../../components/Locations/LocationCard";
 import NotFound from "../404";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-
+import { slugify } from "@/src/utils/slugify";
 
 interface MenuProps {
   cmsData: any;
   menuData: any;
+  location?: string
 }
 
-const Menu: React.FC<MenuProps> = ({ cmsData, menuData }) => {
+const Menu: React.FC<MenuProps> = ({ cmsData, menuData, location }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [locationId, setLocationId] = useState<number | null>(null);
   const [selectedMobileLocationId, setSelectedMobileLocationId] = useState<
     number | null
   >(null);
-
-  const slugify = (text: string) =>
-    text
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/(^-|-$)+/g, "");
 
   // Use the custom hook for CMS data and locations
   const cms = menuData;
 
 
   const allCMS = cmsData || {};
-
-  const [mergedLocations, setMergedLocations] = useState<any[]>([]);
-
-  useEffect(() => {
-    const canadaCards =
-      allCMS?.["canada-locations"]?.sections?.locationsSection?.cards || [];
-    const usaCards =
-      allCMS?.["usa-locations"]?.sections?.locationsSection?.cards || [];
-
-    console.log("🇨🇦 Canada cards count:", canadaCards.length, canadaCards);
-    console.log("🇺🇸 USA cards count:", usaCards.length, usaCards);
-
-    // Combine Canada + USA
-    const combined = [...canadaCards, ...usaCards]
-      .filter((loc) => loc && loc.title) // keep even if id is missing
-      .map((loc) => ({
-        id: Number(loc.id) || null,
-        title: loc.title,
-        address1: loc.address1,
-        address2: loc.address2,
-        phone: loc.phone,
-        description: loc.description,
-        timings: loc.timings,
-        links: loc.links,
-      }));
-
-    console.log("🌍 Combined total locations:", combined.length, combined);
-
-    setMergedLocations(combined);
-  }, [allCMS]);
-
 
   //   const transformedLocations =
   //     menuLocations?.map((card: any) => ({
@@ -84,60 +47,35 @@ const Menu: React.FC<MenuProps> = ({ cmsData, menuData }) => {
   //       links: card.links,
   //     })) || [];
 
+  const mergedLocations = [
+    ...(allCMS?.["canada-locations"]?.sections?.locationsSection?.cards || []),
+    ...(allCMS?.["usa-locations"]?.sections?.locationsSection?.cards || [])
+  ]
+    .filter((loc) => loc && loc.title)
+    .map((loc) => ({
+      id: Number(loc.id) || null,
+      title: loc.title,
+      address1: loc.address1,
+      address2: loc.address2,
+      phone: loc.phone,
+      description: loc.description,
+      timings: loc.timings,
+      links: loc.links,
+    }));
+
   // Get location ID from URL query parameter and update when URL changes
   const params = useParams();
+  const locationSlug = location;
+  const matchedLocation = mergedLocations.find(
+    (loc: any) =>
+      loc.title
+        ?.toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)+/g, "") === locationSlug,
+  );
 
-  const locationSlug = params?.location as string;
+  const locationId = matchedLocation?.id || null;
   const slug = params?.slug as string;
-
-  // HANDLE LOCATION SLUG (ajax → locationId 21)
-  useEffect(() => {
-    // Wait until locations are loaded
-    if (!mergedLocations.length) return;
-
-    if (locationSlug) {
-      const matchedLocation = mergedLocations.find(
-        (loc: any) =>
-          loc.title
-            ?.toLowerCase()
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/(^-|-$)+/g, "") === locationSlug,
-      );
-
-      if (matchedLocation) {
-        setLocationId(Number(matchedLocation.id));
-        setSelectedMobileLocationId(Number(matchedLocation.id));
-      } else {
-        setLocationId(null);
-        setSelectedMobileLocationId(null);
-      }
-    } else {
-      // no slug → show all items
-      setLocationId(null);
-      setSelectedMobileLocationId(null);
-    }
-
-    // Handle item modal (same as before)
-    if (!slug || !cms?.sections?.menuSection?.menuItems) return;
-
-    const allItems = cms.sections.menuSection.menuItems.flatMap(
-      (cat: any) => cat.items,
-    );
-
-    const matchedItem = allItems.find((i: any) => slugify(i.title) === slug);
-
-    if (matchedItem) {
-      setSelectedProduct({
-        id: matchedItem.id,
-        title: matchedItem.title,
-        desc: matchedItem.description,
-        img: matchedItem.image?.url,
-        reviews: matchedItem.reviews_count || 0,
-        locations: matchedItem.locations || [],
-      });
-      setModalOpen(true);
-    }
-  }, [locationSlug, slug, mergedLocations, cms]);
 
   const handleProductClick = (product: any) => {
     setSelectedProduct(product);
@@ -484,7 +422,7 @@ const Menu: React.FC<MenuProps> = ({ cmsData, menuData }) => {
             </div>
             {/* Only render menu if visible in API */}
             {cms?.sections?.menuSection?.visible &&
-              categories.map((category: any, catIdx: any)  => (
+              categories.map((category: any, catIdx: any) => (
                 <div key={catIdx} className="parent bg-[#FFFFFF] p-4 sm:p-6">
                   {/* Category Title */}
                   <div className="title text-[#F15B41] mb-4 sm:mb-6">

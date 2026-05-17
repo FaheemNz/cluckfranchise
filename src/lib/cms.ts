@@ -32,27 +32,89 @@ export const getCMSData = unstable_cache(
   }
 );
 
-export const getMenuData = unstable_cache(
+export async function getMenuData(location?: string) {
+
+  return unstable_cache(
+    async () => {
+
+      console.log("FETCHING MENU FROM API", location);
+
+      const url = location
+        ? `${API_BASE_URL}/api/menu?location=${location}`
+        : `${API_BASE_URL}/api/menu`;
+
+      const res = await fetch(url, {
+        headers: {
+          "X-API-KEY": API_KEY || "",
+        },
+        cache: "force-cache",
+      });
+
+      if (!res.ok) {
+        throw new Error(`Menu API failed: ${res.status}`);
+      }
+
+      const result = await res.json();
+
+      return result.data?.menu || {};
+    },
+    [`menu-data-${location || "global"}`],
+    {
+      revalidate: 300,
+      tags: ["menu"],
+    }
+  )();
+}
+
+export const getBlogData = unstable_cache(
   async () => {
-    console.log("FETCHING CMS FROM API");
-    const res = await fetch(`${API_BASE_URL}/api/menu`, {
-      headers: {
-        "X-API-KEY": API_KEY || "",
-      },
-      cache: "force-cache",
-    });
+
+    console.log("FETCHING BLOG FROM API");
+
+    const res = await fetch(
+      `${API_BASE_URL}/api/blogs?page=1`,
+      {
+        headers: {
+          "X-API-KEY": API_KEY || "",
+        },
+        cache: "force-cache",
+      }
+    );
 
     if (!res.ok) {
-      throw new Error(`Menu API failed: ${res.status}`);
+      throw new Error(`Blog API failed: ${res.status}`);
     }
 
     const result = await res.json();
 
-    return result.data?.menu || {};
+    return result;
   },
-  ["menu-data"],
+  ["blog-data"],
   {
     revalidate: 300,
-    tags: ["menu"],
+    tags: ["blog"],
   }
 );
+
+export async function getBlogPost(slug: string) {
+
+  console.log("FETCHING BLOG POST", slug);
+
+  const res = await fetch(
+    `${API_BASE_URL}/api/blogs/${slug}`,
+    {
+      headers: {
+        "X-API-KEY": API_KEY || "",
+      },
+      cache: "force-cache",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`Blog Post API failed: ${res.status}`);
+  }
+
+  const result = await res.json();
+
+  return result.data || result;
+}

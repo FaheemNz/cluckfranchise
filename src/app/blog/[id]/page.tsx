@@ -1,7 +1,25 @@
-'use client'
+import BlogDetails from '@/src/legacy-pages/about/blog/BlogDetails';
+import { getBlogPost } from '@/src/lib/cms';
 
-import BlogDetails from '@/src/legacy-pages/about/blog/BlogDetails'
+export const revalidate = 0;
 
-export default function BlogDetailsPage() {
-  return <BlogDetails />
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default async function BlogDetailsPage({
+  params
+}: PageProps) {
+
+  const { id } = await params;
+
+  const blogPost = await getBlogPost(id);
+
+  return (
+    <BlogDetails
+      blogPost={blogPost}
+    />
+  );
 }

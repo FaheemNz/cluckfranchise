@@ -1,5 +1,3 @@
-'use client'
-
 interface PagebannerProps {
   title: string;
   subtitle?: string;
@@ -43,14 +41,21 @@ export default function Pagebanner({
       {buttonText && (
         <button
           onClick={() => {
-            if (scrollToTarget) {
-              const targetElement = document.querySelector(scrollToTarget);
-              if (targetElement) {
-                targetElement.scrollIntoView({ behavior: "smooth" });
+            if (typeof window !== 'undefined') {
+
+              if (scrollToTarget) {
+                const targetElement = document.querySelector(scrollToTarget);
+
+                if (targetElement) {
+                  targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                  });
+                }
               }
-            }
-            if (onButtonClick) {
-              onButtonClick();
+
+              if (onButtonClick) {
+                onButtonClick();
+              }
             }
           }}
           className="bg-yellow-400 hover:bg-white text-[#653003] font-bold py-3 px-4 md:px-6 rounded-lg transition-colors duration-200 text-sm md:text-lg mx-4"
