@@ -11,8 +11,6 @@ export default function OrderOnline() {
     if (globalData.isLoaded && globalData.data) {
       const canadaData = globalData.getPageData("canada-locations");
       const usaData = globalData.getPageData("usa-locations");
-
-      // ✅ Real CMS path based on your schema
       const canadaCards =
         canadaData?.sections?.locationsSection?.cards || [];
       const usaCards = usaData?.sections?.locationsSection?.cards || [];

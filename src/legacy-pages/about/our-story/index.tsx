@@ -145,6 +145,7 @@ const OurStory: React.FC<OurStoryProps> = ({
                                                         </a>
                                                     ) : (
                                                         <Link
+                                                            prefetch={false}
                                                             href={card?.links?.primary?.url || card?.ctaUrl || '/'}
                                                             aria-label={card?.links?.primary?.text || card?.ctaText}
                                                             className="mt-auto mb-8 flex items-center font-bold transform transition-all duration-300 

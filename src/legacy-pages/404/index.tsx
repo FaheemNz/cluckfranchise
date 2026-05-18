@@ -30,6 +30,7 @@ const NotFound: React.FC = () => {
                     {/* Navigation Links */}
                     <div>
                         <Link
+                            prefetch={false}
                             href="/"
                             className="inline-block bg-[#F15B40] hover:bg-[#d14a35] text-white font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg"
                         >

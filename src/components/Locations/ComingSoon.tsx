@@ -77,6 +77,7 @@ const ComingSoon = ({
                                     return (
 
                                         <Link
+                                            prefetch={false}
                                             key={index}
                                             href={location.url}
                                             className="border-2 border-[#EF4325] px-6 py-4 text-center min-w-[200px] cursor-pointer"

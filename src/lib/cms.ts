@@ -32,39 +32,25 @@ export const getCMSData = unstable_cache(
   }
 );
 
-export async function getMenuData(location?: string) {
+export const getMenuData = unstable_cache(
+  async (location?: string) => {
+    console.log("FETCHING MENU FROM API", location);
+    const url = location
+      ? `${API_BASE_URL}/api/menu?location=${location}`
+      : `${API_BASE_URL}/api/menu`;
 
-  return unstable_cache(
-    async () => {
+    const res = await fetch(url, {
+      headers: { "X-API-KEY": API_KEY || "" },
+      cache: "force-cache",
+    });
 
-      console.log("FETCHING MENU FROM API", location);
-
-      const url = location
-        ? `${API_BASE_URL}/api/menu?location=${location}`
-        : `${API_BASE_URL}/api/menu`;
-
-      const res = await fetch(url, {
-        headers: {
-          "X-API-KEY": API_KEY || "",
-        },
-        cache: "force-cache",
-      });
-
-      if (!res.ok) {
-        throw new Error(`Menu API failed: ${res.status}`);
-      }
-
-      const result = await res.json();
-
-      return result.data?.menu || {};
-    },
-    [`menu-data-${location || "global"}`],
-    {
-      revalidate: 300,
-      tags: ["menu"],
-    }
-  )();
-}
+    if (!res.ok) throw new Error(`Menu API failed: ${res.status}`);
+    const result = await res.json();
+    return result.data?.menu || {};
+  },
+  ["menu-data"],
+  { revalidate: 300, tags: ["menu"] }
+);
 
 export const getBlogData = unstable_cache(
   async () => {

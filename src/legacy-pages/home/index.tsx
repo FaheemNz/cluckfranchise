@@ -163,6 +163,7 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
                                     {cms?.home?.crispyAndCrunchySection?.description}
                                 </p>
                                 <Link
+                                    prefetch={false}
                                     href={cms?.home?.crispyAndCrunchySection?.links?.location?.url || '/locations'}
                                     className="cta-link cta-link-arrow touch-manipulation inline-flex items-center justify-center"
                                 >
@@ -271,7 +272,7 @@ const Home: React.FC<HomeProps> = ({ cmsData }) => {
                                             {cms?.home?.newsSection?.links?.award?.text}
                                         </a>
                                     ) : (
-                                        <Link href={url || '/press'} className="cta-link cta-link-arrow font-bold text-[#F15B40] touch-manipulation">
+                                        <Link prefetch={false} href={url || '/press'} className="cta-link cta-link-arrow font-bold text-[#F15B40] touch-manipulation">
                                             {cms?.home?.newsSection?.links?.award?.text}
                                         </Link>
                                     );

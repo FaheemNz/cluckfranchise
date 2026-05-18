@@ -22,6 +22,7 @@ export default function LocationFile() {
     <div className="w-full px-4 sm:px-16 lg:px-32 flex flex-col sm:flex-row gap-8 justify-center items-center p-8">
       {locations.map(loc => (
         <Link
+          prefetch={false}
           key={loc.name}
           href={loc.url} // <-- Link ke liye "to"
           className="relative w-full sm:w-[600px] h-[250px] sm:h-[350px] rounded-3xl overflow-hidden shadow-lg flex items-center justify-center"

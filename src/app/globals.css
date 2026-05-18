@@ -551,3 +551,9 @@ html {
   }
 
 }
+
+html:has(.product-modal-open),
+body:has(.product-modal-open) {
+  overflow: hidden !important;
+  height: 100% !important;
+}

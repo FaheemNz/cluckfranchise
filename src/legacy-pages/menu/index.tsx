@@ -465,6 +465,7 @@ const Menu: React.FC<MenuProps> = ({ cmsData, menuData, location }) => {
                               }}
                             >
                               <Link
+                                prefetch={false}
                                 href={`/items/${slugify(product.title)}`}
                                 onClick={(e) => e.stopPropagation()}
                                 className="hover:text-[#F15B40] transition-colors duration-200"

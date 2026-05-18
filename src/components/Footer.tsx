@@ -91,7 +91,8 @@ const Footer = () => {
                 {/* Navigation Links */}
                 <div className="flex justify-center space-x-4 md:space-x-8 flex-wrap px-4">
 
-                    <Link
+                    <Link 
+                        prefetch={false}
                         href="/order"
                         className="text-lg md:text-[23px] text-white font-bold font-[MDNichrome-Black] uppercase hover:opacity-80 transition-all duration-300 transform hover:scale-105"
                     >
@@ -99,6 +100,7 @@ const Footer = () => {
                     </Link>
 
                     <Link
+                        prefetch={false}
                         href="/locations"
                         className="text-lg md:text-[23px] font-[MDNichrome-Black] text-white font-bold uppercase hover:opacity-80 transition-all duration-300 transform hover:scale-105"
                     >
@@ -106,6 +108,7 @@ const Footer = () => {
                     </Link>
 
                     <Link
+                        prefetch={false}
                         href="/franchising"
                         className="text-lg md:text-[23px] font-[MDNichrome-Black] text-white font-bold uppercase hover:opacity-80 transition-all duration-300 transform hover:scale-105"
                     >
@@ -113,6 +116,7 @@ const Footer = () => {
                     </Link>
 
                     <Link
+                        prefetch={false}
                         href="/contact"
                         className="text-lg md:text-[23px] font-[MDNichrome-Black] text-white font-bold uppercase hover:opacity-80 transition-all duration-300 transform hover:scale-105"
                     >
@@ -125,6 +129,7 @@ const Footer = () => {
                 <div className="my-5">
 
                     <Link
+                        prefetch={false}
                         href="/"
                         className="inline-block hover:opacity-80 transition-all duration-300 transform hover:scale-105"
                     >
@@ -135,7 +140,7 @@ const Footer = () => {
                                 src="/assets/logo_white.png"
                                 alt="Cluck Clucks Logo"
                                 className="h-20 md:h-[115px] w-auto object-contain brightness-0 invert"
-                                loading="eager"
+                                loading="lazy"
                             />
 
                         </div>

@@ -77,6 +77,7 @@ const CateringSection = ({
                         <div className="text-center">
 
                             <Link
+                                prefetch={false}
                                 href={
                                     cateringSection.links?.catering?.url ||
                                     "/catering"

@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import Navigation from "@/src/components/Navigation";
 import Footer from "@/src/components/Footer";
 import ScrollToTopVercel from "@/src/components/ScrollToTopVercel";
-import AppInitializer from "@/src/components/AppInitializer";
 import PromotionalBannerWrapper from "@/src/components/common/PromotionalBanner";
 import { getCMSData } from "@/src/lib/cms";
 import { CMSProvider } from "@/src/context/CMSContext";
@@ -28,8 +27,6 @@ export default async function RootLayout({
 
       <body>
         <CMSProvider cmsData={cmsData}>
-
-          <AppInitializer />
 
           {/* Optional home-page-only banner wrapper */}
           <PromotionalBannerWrapper />
