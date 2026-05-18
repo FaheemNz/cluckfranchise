@@ -12,6 +12,7 @@ import ErrorBoundary from '../../components/Home/ErrorBoundary';
 import OptimizedImage from '../../components/Home/OptimizedImage';
 import LightboxImageDisplay from '../../components/common/LightboxImageDisplay';
 import { processImageUrl } from '../../utils/imageUtils';
+import { useCMS } from '@/src/context/CMSContext';
 
 const DEFAULT_IMAGE_CARDS = [
     { id: 1, src: '/assets/img1.webp', alt: 'Multi-layered Fried Chicken & Waffles Stack' },
@@ -19,11 +20,8 @@ const DEFAULT_IMAGE_CARDS = [
     { id: 3, src: '/assets/img3.webp', alt: 'Fried Chicken Sandwich' }
 ];
 
-interface HomeProps {
-    cmsData: any;
-}
-
-const Home: React.FC<HomeProps> = ({ cmsData }) => {
+const Home: React.FC = () => {
+    const cmsData = useCMS();
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
     const [selectedSection, setSelectedSection] = useState<'imagesSection' | 'imagesSection2' | null>(null);
     const [zoom, setZoom] = useState<number>(1);

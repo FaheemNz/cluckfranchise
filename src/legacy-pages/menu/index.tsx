@@ -10,14 +10,15 @@ import NotFound from "../404";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { slugify } from "@/src/utils/slugify";
+import { useCMS } from '@/src/context/CMSContext';
 
 interface MenuProps {
-  cmsData: any;
   menuData: any;
   location?: string
 }
 
-const Menu: React.FC<MenuProps> = ({ cmsData, menuData, location }) => {
+const Menu: React.FC<MenuProps> = ({ menuData, location }) => {
+  const cmsData = useCMS();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [selectedMobileLocationId, setSelectedMobileLocationId] = useState<

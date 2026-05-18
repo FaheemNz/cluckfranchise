@@ -1,5 +1,6 @@
 'use client'
 
+import { useCMS } from '@/src/context/CMSContext';
 import React, { useState } from 'react';
 import Pagebanner from '../../../components/common/Pagebanner';
 import OptimizedImage from '../../../components/Home/OptimizedImage';
@@ -7,15 +8,9 @@ import ErrorBoundary from '../../../components/Home/ErrorBoundary';
 import { processImageUrl } from '../../../utils/imageUtils';
 import LightboxImageDisplay from '../../../components/common/LightboxImageDisplay';
 
-interface HalalProps {
-    cmsData: any;
-}
-
-const Halal: React.FC<HalalProps> = ({
-    cmsData
-}) => {
-
-    const cms = cmsData?.sections || {};
+const Halal: React.FC = () => {
+    const cmsData = useCMS();
+    const cms = cmsData?.halal?.sections || {};
 
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 

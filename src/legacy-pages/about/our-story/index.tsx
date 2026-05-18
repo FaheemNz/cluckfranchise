@@ -6,15 +6,11 @@ import Pagebanner from '@/src/components/common/Pagebanner';
 import ErrorBoundary from '../../../components/Home/ErrorBoundary';
 import { processImageUrl } from '../../../utils/imageUtils';
 import OptimizedImage from '../../../components/Home/OptimizedImage';
+import { useCMS } from '@/src/context/CMSContext';
 
-interface OurStoryProps {
-    cmsData: any;
-}
-
-const OurStory: React.FC<OurStoryProps> = ({
-    cmsData
-}) => {
-    const cms = cmsData?.sections || {};
+const OurStory: React.FC = () => {
+    const cmsData = useCMS();
+    const cms = cmsData?.about?.sections || {};
 
     return (
         <ErrorBoundary>

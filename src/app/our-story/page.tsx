@@ -1,13 +1,5 @@
-import OurStory from '@/src/legacy-pages/about/our-story'
-import { getCMSData } from '@/src/lib/cms';
+import OurStory from '@/src/legacy-pages/about/our-story';
 
-export default async function Page() {
-
-  const cmsData = await getCMSData();
-
-  return (
-    <OurStory
-      cmsData={cmsData.about}
-    />
-  );
+export default function Page() {
+  return <OurStory />;
 }

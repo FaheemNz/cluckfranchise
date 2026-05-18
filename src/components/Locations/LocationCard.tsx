@@ -173,6 +173,11 @@ const LocationCard = ({
         {!hideLocationDetails && (
           <button
             onClick={() => {
+              if (onLocationDetails) {
+                onLocationDetails();
+                return;
+              }
+
               const slug = location.name
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, "-")

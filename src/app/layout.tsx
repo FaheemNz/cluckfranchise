@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import Navigation from "@/src/components/Navigation";
 import Footer from "@/src/components/Footer";
 import ScrollToTopVercel from "@/src/components/ScrollToTopVercel";
-import PromotionalBannerWrapper from "@/src/components/common/PromotionalBanner";
+import PromotionalBannerWrapper from "@/src/components/common/PromotionalBannerWrapper";
 import { getCMSData } from "@/src/lib/cms";
 import { CMSProvider } from "@/src/context/CMSContext";
 
@@ -18,35 +18,27 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const cmsData = await getCMSData();
 
+  const bannerData = cmsData?.banner || null;
+
   return (
-
     <html lang="en">
-
       <body>
         <CMSProvider cmsData={cmsData}>
-
-          {/* Optional home-page-only banner wrapper */}
-          <PromotionalBannerWrapper />
+          <PromotionalBannerWrapper bannerData={bannerData} />
 
           <ScrollToTopVercel />
 
           <div className="flex flex-col min-h-screen">
-
             <Navigation />
 
-            <main className="flex-grow">
-              {children}
-            </main>
+            <main className="flex-grow">{children}</main>
 
             <Footer />
-
           </div>
         </CMSProvider>
       </body>
-
     </html>
   );
 }

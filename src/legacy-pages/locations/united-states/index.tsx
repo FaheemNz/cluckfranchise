@@ -118,7 +118,7 @@ const UnitedStates: React.FC<UnitedStatesProps> = ({ cmsData }) => {
                   onLocationDetails={() => {
                     setIsNavigating(true);
 
-                    window.location.href = `/menu/${location.name
+                    window.location.href = `/${location.name
                       ?.toLowerCase()
                       .replace(/[^a-z0-9]+/g, "-")
                       .replace(/(^-|-$)+/g, "")}`;

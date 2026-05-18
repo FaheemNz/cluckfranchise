@@ -1,13 +1,5 @@
-import Halal from '@/src/legacy-pages/about/halal'
-import { getCMSData } from '@/src/lib/cms';
+import Halal from '@/src/legacy-pages/about/halal';
 
-export default async function Page() {
-
-  const cmsData = await getCMSData();
-
-  return (
-    <Halal
-      cmsData={cmsData.halal}
-    />
-  );
+export default function Page() {
+  return <Halal />;
 }

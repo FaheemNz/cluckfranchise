@@ -131,9 +131,7 @@ const Canada: React.FC<CanadaProps> = ({ cmsData }) => {
                   onLocationDetails={() => {
                     setIsNavigating(true);
 
-                    window.location.href = `/menu/${getLocationSlug(
-                      location.name
-                    )}`;
+                    window.location.href = `/${getLocationSlug(location.name)}`;
                   }}
                 />
               ))}

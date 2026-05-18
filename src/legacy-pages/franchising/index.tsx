@@ -10,25 +10,17 @@ import ApplyForm from "../../components/franchising/applyForm";
 import ErrorBoundary from "../../components/Home/ErrorBoundary";
 import { processImageUrl } from "../../utils/imageUtils";
 import LightboxImageDisplay from "../../components/common/LightboxImageDisplay";
+import { useCMS } from '@/src/context/CMSContext';
 
-interface FranchisingProps {
-  cmsData: any;
-}
-
-const Franchising: React.FC<FranchisingProps> = ({
-  cmsData
-}) => {
+const Franchising: React.FC = () => {
+  const cmsData = useCMS();
+  const cms = cmsData?.franchising?.sections || {};
 
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
     null
   );
 
   const [zoom, setZoom] = useState<number>(1);
-
-  const cms = cmsData?.sections || {};
-
-  console.log('FRANCHISING CMS:', cms);
-
   useEffect(() => {
 
     const handleKeyDown = (event: KeyboardEvent) => {
