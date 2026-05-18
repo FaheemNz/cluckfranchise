@@ -492,7 +492,7 @@ const Menu: React.FC<MenuProps> = ({ menuData, location }) => {
 
                                 return (
                                   <Link
-                                    prefetch={true}
+                                    prefetch={false}
                                     href={`/items/${itemSlug}`}
                                     onClick={(e) => handleMenuItemNavigation(e, product)}
                                     className="hover:text-[#F15B40] transition-colors duration-200 inline-flex items-center gap-2"

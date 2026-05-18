@@ -213,7 +213,7 @@ export default function ProductModal({
           <img
             src={product.img}
             alt={product.title}
-            className="w-full h-48 sm:h-56 md:h-64 object-cover rounded-t-xl"
+            className="w-full h-48 sm:h-56 md:h-64 object-contain rounded-t-xl"
           />
         )}
 
