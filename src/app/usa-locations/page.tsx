@@ -1,8 +1,14 @@
-import UnitedStates from '@/src/legacy-pages/locations/united-states'
-import { getCMSData } from '@/src/lib/cms'
+import type { Metadata } from "next";
+import UnitedStates from "@/src/legacy-pages/locations/united-states";
+import { getCMSData } from "@/src/lib/cms";
+import { buildPageMetadata } from "@/src/lib/seo";
 
-export default async function Page() {
-  const cmsData = await getCMSData()
+export async function generateMetadata(): Promise<Metadata> {
+  const cmsData = await getCMSData();
 
-  return <UnitedStates cmsData={cmsData} />
+  return buildPageMetadata(cmsData?.["usa-locations"]?.seo);
+}
+
+export default function Page() {
+  return <UnitedStates />;
 }

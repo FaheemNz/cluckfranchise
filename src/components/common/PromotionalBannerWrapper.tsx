@@ -18,8 +18,18 @@ export default function PromotionalBannerWrapper({
 }: PromotionalBannerWrapperProps) {
   const pathname = usePathname();
 
-  if (pathname !== '/') return null;
-  if (!bannerData?.active) return null;
+  const normalizedPathname = pathname?.replace(/\/+$/, '') || '/';
+  const isHomePage = normalizedPathname === '/';
+
+  console.log('BANNER DEBUG:', {
+    pathname,
+    normalizedPathname,
+    isHomePage,
+    bannerData,
+  });
+
+  if (!isHomePage) return null;
+  if (bannerData?.active !== true) return null;
 
   return <PromotionalBanner bannerData={bannerData} />;
 }

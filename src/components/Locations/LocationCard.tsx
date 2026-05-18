@@ -1,6 +1,7 @@
 'use client'
 
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Link from "next/link";
 
 interface LocationData {
   id: string;
@@ -50,7 +51,12 @@ const LocationCard = ({
   hideLocationDetails = false,
 }: LocationCardProps) => {
 
-  const router = useRouter();
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  const locationSlug = location.name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)+/g, "");
 
   return (
     <div
@@ -171,24 +177,29 @@ const LocationCard = ({
           </button>
         )}
         {!hideLocationDetails && (
-          <button
-            onClick={() => {
-              if (onLocationDetails) {
-                onLocationDetails();
-                return;
-              }
-
-              const slug = location.name
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, "-")
-                .replace(/(^-|-$)+/g, "");
-
-              router.push(`/${slug}`);
-            }}
-            className="w-full bg-[#f15b40] text-[16px] text-[#ffffff] font-bold py-4 px-6 rounded-lg hover:bg-[#f3c317] hover:text-[#653003] transition-all duration-200 uppercase tracking-wide"
-          >
-            LOCATION DETAILS + MENU
-          </button>
+          <>
+            {onLocationDetails ? (
+              <button
+                onClick={() => {
+                  setIsNavigating(true);
+                  onLocationDetails();
+                }}
+                disabled={isNavigating}
+                className="w-full bg-[#f15b40] text-[16px] text-[#ffffff] font-bold py-4 px-6 rounded-lg hover:bg-[#f3c317] hover:text-[#653003] transition-all duration-200 uppercase tracking-wide disabled:opacity-70 disabled:cursor-wait"
+              >
+                {isNavigating ? "LOADING MENU..." : "LOCATION DETAILS + MENU"}
+              </button>
+            ) : (
+              <Link
+                href={`/${locationSlug}`}
+                prefetch={true}
+                onClick={() => setIsNavigating(true)}
+                className="block text-center w-full bg-[#f15b40] text-[16px] text-[#ffffff] font-bold py-4 px-6 rounded-lg hover:bg-[#f3c317] hover:text-[#653003] transition-all duration-200 uppercase tracking-wide"
+              >
+                {isNavigating ? "LOADING MENU..." : "LOCATION DETAILS + MENU"}
+              </Link>
+            )}
+          </>
         )}
       </div>
 

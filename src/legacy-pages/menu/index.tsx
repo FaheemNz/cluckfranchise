@@ -8,7 +8,7 @@ import { processImageUrl } from "../../utils/imageUtils";
 import LocationCard from "../../components/Locations/LocationCard";
 import NotFound from "../404";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { slugify } from "@/src/utils/slugify";
 import { useCMS } from '@/src/context/CMSContext';
 
@@ -24,6 +24,26 @@ const Menu: React.FC<MenuProps> = ({ menuData, location }) => {
   const [selectedMobileLocationId, setSelectedMobileLocationId] = useState<
     number | null
   >(null);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [navigatingItemSlug, setNavigatingItemSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    setNavigatingItemSlug(null);
+  }, [pathname]);
+
+  const handleMenuItemNavigation = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    product: any
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const itemSlug = slugify(product.title);
+    setNavigatingItemSlug(itemSlug);
+
+    router.push(`/items/${itemSlug}`);
+  };
 
   // Use the custom hook for CMS data and locations
   const cms = menuData;
@@ -444,11 +464,12 @@ const Menu: React.FC<MenuProps> = ({ menuData, location }) => {
                         {/* Fixed image container - only show if image exists */}
 
                         {product.img && (
-                          <div className="min-w-[96px] sm:min-w-[112px] md:min-w-[128px]">
+                          <div className="w-[110px] h-[110px] sm:w-[120px] sm:h-[120px] md:w-[140px] md:h-[140px] flex-shrink-0 flex items-center justify-center overflow-hidden">
                             <img
-                              className="md:w-32 md:h-auto"
+                              className="w-full h-full object-contain"
                               src={product.img}
                               alt={product.title}
+                              loading="lazy"
                             />
                           </div>
                         )}
@@ -465,14 +486,26 @@ const Menu: React.FC<MenuProps> = ({ menuData, location }) => {
                                   '"MDNichrome", "Arial Black", "Helvetica Black",  sans-serif',
                               }}
                             >
-                              <Link
-                                prefetch={false}
-                                href={`/items/${slugify(product.title)}`}
-                                onClick={(e) => e.stopPropagation()}
-                                className="hover:text-[#F15B40] transition-colors duration-200"
-                              >
-                                {product.title}
-                              </Link>
+                              {(() => {
+                                const itemSlug = slugify(product.title);
+                                const isItemNavigating = navigatingItemSlug === itemSlug;
+
+                                return (
+                                  <Link
+                                    prefetch={true}
+                                    href={`/items/${itemSlug}`}
+                                    onClick={(e) => handleMenuItemNavigation(e, product)}
+                                    className="hover:text-[#F15B40] transition-colors duration-200 inline-flex items-center gap-2"
+                                    aria-busy={isItemNavigating}
+                                  >
+                                    <span>{product.title}</span>
+
+                                    {isItemNavigating && (
+                                      <span className="inline-block w-4 h-4 border-2 border-[#894207] border-t-transparent rounded-full animate-spin" />
+                                    )}
+                                  </Link>
+                                );
+                              })()}
                             </h3>
                           </div>
                           <p

@@ -5,12 +5,10 @@ import LocationCard from "../../../components/Locations/LocationCard";
 import Pagebanner from "../../../components/common/Pagebanner";
 import ComingSoon from "../../../components/Locations/ComingSoon";
 import ErrorBoundary from "../../../components/Home/ErrorBoundary";
+import { useCMS } from "@/src/context/CMSContext";
 
-interface UnitedStatesProps {
-  cmsData: any;
-}
-
-const UnitedStates: React.FC<UnitedStatesProps> = ({ cmsData }) => {
+const UnitedStates: React.FC = () => {
+  const cmsData = useCMS();
   const [isNavigating, setIsNavigating] = useState(false);
   const usSections = cmsData?.["usa-locations"]?.sections;
 
