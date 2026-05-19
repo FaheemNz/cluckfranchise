@@ -22,6 +22,7 @@ const Footer = () => {
 
                     {/* Facebook */}
                     <a
+                        aria-label="Visit Cluck Clucks on Facebook"
                         href="https://www.facebook.com/cluckclucks/"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -36,6 +37,7 @@ const Footer = () => {
                     <a
                         href="https://www.instagram.com/cluckcluks/"
                         target="_blank"
+                        aria-label="Visit Cluck Cluck Instagram"
                         rel="noopener noreferrer"
                         className="text-white hover:opacity-80 transition-all duration-300 transform hover:scale-110"
                     >
@@ -74,6 +76,7 @@ const Footer = () => {
                     <a
                         href="https://www.youtube.com/@CLUCKCLUCKS"
                         target="_blank"
+                        aria-label="Visit Cluck Clucks Youtube"
                         rel="noopener noreferrer"
                         className="text-white hover:opacity-80 transition-all duration-300 transform hover:scale-110"
                     >
