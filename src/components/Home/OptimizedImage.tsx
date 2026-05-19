@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { toAbsoluteUrl } from "@/src/services/updatesService";
 
@@ -40,7 +38,7 @@ const OptimizedImage = ({
   return (
     <Image
       src={imageSrc || fallbackSrc}
-      alt={alt}
+      alt={alt || "Cluck Clucks image"}
       className={className}
       onLoad={onLoad}
       onError={onError}
@@ -49,7 +47,6 @@ const OptimizedImage = ({
       loading={priority ? "eager" : loading}
       width={width}
       height={height}
-      unoptimized
     />
   );
 };

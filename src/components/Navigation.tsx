@@ -35,6 +35,8 @@ const Navigation = () => {
             <div className="hidden lg:flex items-center space-x-8">
               <div className="relative group">
                 <button
+                  aria-label="Open locations menu"
+                  aria-expanded={isLocationsOpen}
                   className="text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200"
                   onClick={() => setIsLocationsOpen(!isLocationsOpen)}
                   onMouseEnter={() => setIsLocationsOpen(true)}
@@ -51,14 +53,14 @@ const Navigation = () => {
                   onMouseLeave={() => setIsLocationsOpen(false)}
                 >
                   <div className="py-3">
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/canada-locations"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsLocationsOpen(false)}
                     >
                       CANADA
                     </Link>
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/usa-locations"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsLocationsOpen(false)}
@@ -68,13 +70,13 @@ const Navigation = () => {
                   </div>
                 </div>
               </div>
-              <Link prefetch={false} 
+              <Link prefetch={false}
                 href="/menu"
                 className="text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200"
               >
                 MENU
               </Link>
-              <Link prefetch={false} 
+              <Link prefetch={false}
                 href="/catering"
                 className="hidden xl:flex text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200"
               >
@@ -85,6 +87,8 @@ const Navigation = () => {
                   className="hidden xl:block text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200"
                   onClick={() => setIsAboutOpen(!isAboutOpen)}
                   onMouseEnter={() => setIsAboutOpen(true)}
+                  aria-label="Open about menu"
+                  aria-expanded={isAboutOpen}
                   onMouseLeave={() => setIsAboutOpen(false)}
                 >
                   ABOUT
@@ -96,28 +100,28 @@ const Navigation = () => {
                   onMouseLeave={() => setIsAboutOpen(false)}
                 >
                   <div className="py-3">
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/our-story"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsAboutOpen(false)}
                     >
                       OUR STORY
                     </Link>
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/halal"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsAboutOpen(false)}
                     >
                       HALAL
                     </Link>
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/gallery"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsAboutOpen(false)}
                     >
                       GALLERY
                     </Link>
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/blog"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsAboutOpen(false)}
@@ -140,7 +144,7 @@ const Navigation = () => {
             <div className="hidden lg:flex flex-col items-center lg:mx-11 xl:mx-0">
               <div className="relative">
                 {/* Logo Image */}
-                <Link prefetch={false} 
+                <Link prefetch={false}
                   href="/"
                   className="block hover:opacity-80 transition-opacity duration-200"
                 >
@@ -156,13 +160,13 @@ const Navigation = () => {
 
             {/* Right Navigation Items - Hidden on small screens, visible on lg and above */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link prefetch={false} 
+              <Link prefetch={false}
                 href="/franchising"
                 className="hidden xl:flex text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200"
               >
                 FRANCHISING
               </Link>
-              <Link prefetch={false} 
+              <Link prefetch={false}
                 href="/press"
                 className="hidden xl:flex text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200"
               >
@@ -176,7 +180,7 @@ const Navigation = () => {
               >
                 LOYALTY
               </a>
-              <Link prefetch={false} 
+              <Link prefetch={false}
                 href="/locations"
                 onClick={() => setIsMenuOpen(false)}
                 className="bg-[#F3C317] text-[18px] hover:bg-yellow-500 text-[#653003] font-bold py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 uppercase tracking-wide"
@@ -188,6 +192,8 @@ const Navigation = () => {
                 <button
                   className="text-orange-600 hover:text-orange-700 font-bold text-lg tracking-wide uppercase transition-colors duration-200 flex items-center space-x-1"
                   onClick={() => setIsMoreOpen(!isMoreOpen)}
+                  aria-label="Open more menu"
+                  aria-expanded={isMoreOpen}
                   onMouseEnter={() => setIsMoreOpen(true)}
                   onMouseLeave={() => setIsMoreOpen(false)}
                 >
@@ -213,7 +219,7 @@ const Navigation = () => {
                   onMouseLeave={() => setIsMoreOpen(false)}
                 >
                   <div className="py-3">
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/catering"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsMoreOpen(false)}
@@ -228,28 +234,28 @@ const Navigation = () => {
                       </div>
                       <div className="absolute left-full top-0 ml-2 w-48 bg-white shadow-lg rounded-lg opacity-0 invisible group-hover/our-story:opacity-100 group-hover/our-story:visible transition-all duration-200 z-50">
                         <div className="py-3">
-                          <Link prefetch={false} 
+                          <Link prefetch={false}
                             href="/our-story"
                             className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                             onClick={() => setIsMoreOpen(false)}
                           >
                             OUR STORY
                           </Link>
-                          <Link prefetch={false} 
+                          <Link prefetch={false}
                             href="/halal"
                             className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                             onClick={() => setIsMoreOpen(false)}
                           >
                             HALAL
                           </Link>
-                          <Link prefetch={false} 
+                          <Link prefetch={false}
                             href="/gallery"
                             className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                             onClick={() => setIsMoreOpen(false)}
                           >
                             GALLERY
                           </Link>
-                          <Link prefetch={false} 
+                          <Link prefetch={false}
                             href="/blog"
                             className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                             onClick={() => setIsMoreOpen(false)}
@@ -267,14 +273,14 @@ const Navigation = () => {
                       </div>
                     </div>
 
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/franchising"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsMoreOpen(false)}
                     >
                       FRANCHISING
                     </Link>
-                    <Link prefetch={false} 
+                    <Link prefetch={false}
                       href="/press"
                       className="block px-4 py-3 text-orange-600 hover:text-orange-700 font-bold uppercase tracking-wide transition-colors text-center"
                       onClick={() => setIsMoreOpen(false)}
@@ -299,7 +305,7 @@ const Navigation = () => {
             <div className="lg:hidden flex items-center justify-between w-full">
               {/* Logo Image on Left */}
               <div className="flex items-center">
-                <Link prefetch={false} 
+                <Link prefetch={false}
                   href="/"
                   className="block hover:opacity-80 transition-opacity duration-200"
                 >
@@ -317,6 +323,10 @@ const Navigation = () => {
 
                 {/* Hamburger menu icon */}
                 <button
+                  type="button"
+                  aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                  aria-expanded={isMenuOpen}
+                  aria-controls="mobile-navigation-menu"
                   onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="text-orange-500 hover:text-orange-600 transition-colors"
                 >
@@ -347,11 +357,16 @@ const Navigation = () => {
           <div className="absolute inset-0 bg-black"></div>
 
           {/* Menu content */}
-          <div className="relative h-full flex flex-col overflow-y-auto pb-24">
+          <div
+            id="mobile-navigation-menu"
+            className="relative h-full flex flex-col overflow-y-auto pb-24"
+          >
             {/* Top section with descriptive text and close button */}
             <div className="flex justify-end items-start p-6">
               {/* Close button */}
               <button
+                type="button"
+                aria-label="Close navigation menu"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-white hover:text-gray-300 transition-colors"
               >
@@ -382,14 +397,14 @@ const Navigation = () => {
                       LOCATIONS
                     </div>
                     <div className="space-y-3">
-                      <Link prefetch={false} 
+                      <Link prefetch={false}
                         href="/canada-locations"
                         className="block text-white text-lg uppercase tracking-wide hover:text-orange-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         CANADA
                       </Link>
-                      <Link prefetch={false} 
+                      <Link prefetch={false}
                         href="/usa-locations"
                         className="block text-white text-lg uppercase tracking-wide hover:text-orange-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
@@ -400,7 +415,7 @@ const Navigation = () => {
                   </div>
 
                   {/* MENU */}
-                  <Link prefetch={false} 
+                  <Link prefetch={false}
                     href="/menu"
                     className="block text-white text-2xl font-bold uppercase tracking-wider hover:text-orange-400 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
@@ -409,7 +424,7 @@ const Navigation = () => {
                   </Link>
 
                   {/* CATERING */}
-                  <Link prefetch={false} 
+                  <Link prefetch={false}
                     href="/catering"
                     className="block text-white text-2xl font-bold uppercase tracking-wider hover:text-orange-400 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
@@ -423,28 +438,28 @@ const Navigation = () => {
                       ABOUT
                     </div>
                     <div className="space-y-3">
-                      <Link prefetch={false} 
+                      <Link prefetch={false}
                         href="/our-story"
                         className="block text-white text-lg uppercase tracking-wide hover:text-orange-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         OUR STORY
                       </Link>
-                      <Link prefetch={false} 
+                      <Link prefetch={false}
                         href="/halal"
                         className="block text-white text-lg uppercase tracking-wide hover:text-orange-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         HALAL
                       </Link>
-                      <Link prefetch={false} 
+                      <Link prefetch={false}
                         href="/gallery"
                         className="block text-white text-lg uppercase tracking-wide hover:text-orange-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         GALLERY
                       </Link>
-                      <Link prefetch={false} 
+                      <Link prefetch={false}
                         href="/blog"
                         className="block text-white text-lg uppercase tracking-wide hover:text-orange-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
@@ -462,7 +477,7 @@ const Navigation = () => {
                   </div>
 
                   {/* FRANCHISING */}
-                  <Link prefetch={false} 
+                  <Link prefetch={false}
                     href="/franchising"
                     className="block text-white text-2xl font-bold uppercase tracking-wider hover:text-orange-400 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
@@ -471,7 +486,7 @@ const Navigation = () => {
                   </Link>
 
                   {/* PRESS */}
-                  <Link prefetch={false} 
+                  <Link prefetch={false}
                     href="/press"
                     className="block text-white text-2xl font-bold uppercase tracking-wider hover:text-orange-400 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
@@ -499,7 +514,7 @@ const Navigation = () => {
 
               {/* ORDER ONLINE Button */}
               <div className="text-center">
-                <Link prefetch={false} 
+                <Link prefetch={false}
                   href="/locations"
                   onClick={() => {
                     setIsMenuOpen(false);

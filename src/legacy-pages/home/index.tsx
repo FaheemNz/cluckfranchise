@@ -314,13 +314,13 @@ const Home: React.FC = () => {
                 {selectedImageIndex !== null && (
                     <div className="fixed inset-0 bg-black/80 flex flex-col z-50 h-screen">
                         <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex space-x-2 sm:space-x-3 z-10">
-                            <button className="bg-black/60 hover:bg-black/80 text-white px-2 py-1 sm:px-3 rounded text-lg sm:text-xl w-8 h-8 sm:w-auto sm:h-auto flex items-center justify-center" onClick={zoomOut}>➖</button>
-                            <button className="bg-black/60 hover:bg-black/80 text-white px-2 py-1 sm:px-3 rounded text-lg sm:text-xl w-8 h-8 sm:w-auto sm:h-auto flex items-center justify-center" onClick={zoomIn}>➕</button>
-                            <button className="bg-black/60 hover:bg-black/80 text-white px-2 py-1 sm:px-3 rounded text-xl sm:text-2xl w-8 h-8 sm:w-auto sm:h-auto flex items-center justify-center" onClick={closeLightbox}>✕</button>
+                            <button aria-label="Zoom out" className="bg-black/60 hover:bg-black/80 text-white px-2 py-1 sm:px-3 rounded text-lg sm:text-xl w-8 h-8 sm:w-auto sm:h-auto flex items-center justify-center" onClick={zoomOut}>➖</button>
+                            <button aria-label="Zoom In" className="bg-black/60 hover:bg-black/80 text-white px-2 py-1 sm:px-3 rounded text-lg sm:text-xl w-8 h-8 sm:w-auto sm:h-auto flex items-center justify-center" onClick={zoomIn}>➕</button>
+                            <button aria-label="Close Button" className="bg-black/60 hover:bg-black/80 text-white px-2 py-1 sm:px-3 rounded text-xl sm:text-2xl w-8 h-8 sm:w-auto sm:h-auto flex items-center justify-center" onClick={closeLightbox}>✕</button>
                         </div>
 
-                        <button className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl bg-black/30 hover:bg-black/50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-10" onClick={handlePrev}>❮</button>
-                        <button className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl bg-black/30 hover:bg-black/50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-10" onClick={handleNext}>❯</button>
+                        <button aria-label="View previous image" className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl bg-black/30 hover:bg-black/50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-10" onClick={handlePrev}>❮</button>
+                        <button  aria-label="View Next image" className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 text-white text-3xl sm:text-4xl bg-black/30 hover:bg-black/50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center z-10" onClick={handleNext}>❯</button>
 
                         <div className="flex-1 flex items-center justify-center overflow-hidden">
                             <div className="w-full sm:w-4/5 lg:w-4/5 h-full flex justify-center items-center">
