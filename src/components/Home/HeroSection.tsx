@@ -43,12 +43,12 @@ const HeroSection = ({
     <section className="mx-5 px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
         <div className="space-y-6 sm:space-y-8 text-left">
-          <h1 className="pm-custom-section-subheading !text-left">
-            {bannerSection.title}
+          <h1 className="font-display text-[42px] sm:text-[58px] lg:text-[76px] leading-[0.95] font-extrabold tracking-[-0.04em] text-[#1b1b1b]">
+            {bannerSection?.title}
           </h1>
 
-          <p className="text-base sm:text-lg md:text-xl text-[#894105] leading-relaxed">
-            {bannerSection.description}
+          <p className="mt-5 max-w-xl text-[17px] sm:text-[19px] leading-[1.65] font-normal text-[#4b4b4b]">
+            {bannerSection?.description}
           </p>
 
           {isExternalOrderUrl ? (
